@@ -1,1 +1,3 @@
-Verreken-Applicatie
+Verreken Applicatie voor Internet technologie!
+
+WIP
