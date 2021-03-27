@@ -26,7 +26,9 @@ export class ExpenseMakerComponent implements OnInit {
 
   addExpense(): void {
     if(this.nameControl.valid && this.amountControl.valid){
-      this.Verreken.addExpense(this.nameControl.value, this.amountControl.value);
+      this.Verreken.addExpense(this.nameControl.value, Math.round((this.amountControl.value + Number.EPSILON) * 100) / 100);
     }
+    this.nameControl.reset();
+    this.amountControl.reset();
   }
 }
