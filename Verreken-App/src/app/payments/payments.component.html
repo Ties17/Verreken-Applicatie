@@ -1,0 +1,17 @@
+<table mat-table [dataSource]="this.Verreken.getPayments()" class="table">
+    <ng-container matColumnDef="payer">
+        <th mat-header-cell *matHeaderCellDef> Naam betaler </th>
+        <td mat-cell *matCellDef="let payment"> {{payment.payer}} </td>
+    </ng-container>
+    <ng-container matColumnDef="amount">
+        <th mat-header-cell *matHeaderCellDef> Hoeveelheid </th>
+        <td mat-cell *matCellDef="let payment"> {{payment.amount}} </td>
+    </ng-container>
+    <ng-container matColumnDef="receiver">
+        <th mat-header-cell *matHeaderCellDef> Naam ontvanger </th>
+        <td mat-cell *matCellDef="let payment"> {{payment.receiver}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
