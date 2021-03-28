@@ -13,6 +13,7 @@ export class VerrekenService {
   addExpense(name: string, amount: number): void {
     let expense: Expense = new Expense(name, amount);
     this.expenses.push(expense);
+    this.expenses = this.eliminateDoubles(this.expenses);
     if (this.expenses.length > 1) {
       this.calculatePayments();
     }
@@ -28,6 +29,7 @@ export class VerrekenService {
 
   calculatePayments(): void {
     this.payments = [];
+
 
     let valPayed = 0;
     this.expenses.forEach(element => {
@@ -64,6 +66,28 @@ export class VerrekenService {
       payers.splice(payers.indexOf(payer), 1);
       receivers.splice(receivers.indexOf(receiver), 1);
     }
+  }
+
+  eliminateDoubles(doubles: Expense[]): Expense[] {
+    let singles: Expense[] = [];
+
+    doubles.forEach(double => {
+      let exists!: Expense;
+      singles.forEach(single => {
+        if (double.name == single.name){
+          exists = single;
+        }
+      })
+      if(exists == null){
+        singles.push(double);
+      } else {
+        singles.splice(singles.indexOf(exists), 1);
+        double.amount += exists.amount;
+        singles.push(double);
+      }
+    })
+
+    return singles;
   }
 }
 
