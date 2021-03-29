@@ -66,6 +66,10 @@ export class VerrekenService {
       payers.splice(payers.indexOf(payer), 1);
       receivers.splice(receivers.indexOf(receiver), 1);
     }
+
+    this.payments.forEach(element => {
+      element.amount = Math.round((element.amount + Number.EPSILON) * 100) / 100;
+    });
   }
 
   eliminateDoubles(doubles: Expense[]): Expense[] {
